@@ -136,6 +136,7 @@ CREATE TABLE my_t(
 id INT PRIMARY KEY,
 name VARCHAR(100) NOT NULL,
 age INT DEFAULT NULL);
+INSERT INTO my_t(id, name, age)
 VALUES
 		(0, 'mert', 32),
 		(1, 'betül', 30),
