@@ -1,4 +1,4 @@
---# Example-1
+-- Example-1
 SELECT 
 	customerNumber,
     customerName, 
@@ -14,7 +14,7 @@ WHERE country NOT IN ('USA', 'Australia') AND creditLimit > 0
 ORDER BY customerNumber ASC
 LIMIT 20;
 
---# Example-2
+-- Example-2
 SELECT
 	rating,
 	# these are called "aggregate functions":
@@ -27,7 +27,7 @@ WHERE rental_rate > 1.99
 GROUP BY 1    -- 1st column. Could write "rating". GROUP BY is placed between these two.
 ORDER BY SUM(replacement_cost) DESC;
 
---# Example-3
+-- Example-3
 SELECT
 	salesRepEmployeeNumber,
 	COUNT(*),    -- group by sütun ile gruplanan kayıtların satır sayısını verir.
@@ -48,7 +48,7 @@ GROUP BY
 	1, 2
 ORDER BY record_count DESC;
     
---# Example-5
+-- Example-5
 SELECT 
 	productLine,
     ROUND(AVG(buyPrice), 1) AS buyPrice_avg
@@ -58,7 +58,7 @@ HAVING buyPrice_avg >= 47
 -- WHERE buyPrice_avg >= 48    -- 'where' cannot be used w/ aggregate funcs.
 ORDER BY buyPrice_avg ASC;
 
---# Example-6
+-- Example-6
 SELECT
 	ord.orderNumber, 
     ord.orderDate, 
@@ -102,7 +102,7 @@ LIMIT
 	20
 ;
 
---# Example-9
+-- Example-9
 -- No such table as "STUDENT
 -- Example output: "Student 3 has grade: A"
 SELECT
@@ -116,3 +116,33 @@ SELECT
     END) AS StudentGrade
 FROM
     STUDENT;
+
+-- Example-10:
+-- No such tables.
+-- Need some fix.
+SELECT DISTINCT P.NAME, C.NAME
+FROM SCHEDULE S
+LEFT JOIN PROFESSOR P ON P.ID = S.PROFESSOR_ID
+INNER JOIN COURSE C ON C.ID = S.COURSE_ID;
+
+-- Example-11
+SELECT c.phone, c.city, e.email, e.JobTitle
+FROM classicmodels.customers c
+RIGHT JOIN employees e ON c.salesRepEmployeeNumber=e.employeeNumber
+WHERE c.phone OR c.city IS NOT NULL;
+
+-- Example-12
+CREATE TABLE my_t(
+id INT PRIMARY KEY,
+name VARCHAR(100) NOT NULL,
+age INT DEFAULT NULL);
+VALUES
+		(0, 'mert', 32),
+		(1, 'betül', 30),
+        (2, 'erdem', 32);
+ALTER TABLE my_t
+ADD birth INT;
+UPDATE my_t
+SET birth = (2021 - age);  -- not working under safe update mode. Will be updated later.
+
+SELECT * FROM my_t;
