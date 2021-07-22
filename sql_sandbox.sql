@@ -146,23 +146,3 @@ ADD birth INT;
 UPDATE my_t
 SET birth = (2021 - age);  -- not working under safe update mode. Will be updated later.
 
--- Example-13: Daily Number of Installs vs. Game Variant
-SELECT
-	A.Date,
-    A.Variant,
-    COUNT(B.Date) as Daily_Inst
-FROM
-	(SELECT
-	DT as Date,
-    Variant_Key as Variant
-	FROM
-    case_db.TB_AB_ENTER) A,
-    (SELECT
-	DT as Date,
-    COUNT(DT) as Daily_Inst
-	FROM
-	case_db.TB_INSTALL I
-GROUP BY I.DT) B
-WHERE A.Date = B.Date
-GROUP BY B.Daily_Inst
-;
